@@ -30,15 +30,19 @@ Use Grok Bot's native action to launch a Cursor Cloud Agent. Grok Ship names thi
 
 Do not save a routine first. Do not wait for an environment Save. Do not clone Thomas repos onto the shared computer.
 
-Cursor documents Cloud Agent starts as the desktop Cloud dropdown, cursor.com/agents, Slack or GitHub or Linear @cursor, and the API. Grok Bot is not on that list. Do not start the agent from cursor.com/agents. That is a website launch, not Grok Bot. See https://cursor.com/help/ai-features/cloud-agents.md
+Do not open cursor.com/agents in the Grok Bot browser. Automated browsers hit Cloudflare bot protection at authenticator.cursor.sh and never reach the agents UI. That path is also a website launch, not Grok Bot. If native launch fails, reply with the exact error. Do not fall back to the website.
+
+Cursor documents Cloud Agent starts as the desktop Cloud dropdown, cursor.com/agents, Slack or GitHub or Linear @cursor, and the API. Grok Bot is not on that list. See https://cursor.com/help/ai-features/cloud-agents.md
 
 If Grok Bot shows a Connect card for Cursor or Cloud Agents, complete it. Plugins belong to the same Cursor account. See https://cursor.com/help/grok-bot/connect-plugins.md
 
-1. Launch one Cursor Cloud Agent on both of these repositories, using this account's personal Cloud Agent environment:
+1. Launch one Cursor Cloud Agent on both of these repositories, using this personal Cloud Agent environment so the waiting desktop agent can see it:
+   - Environment id: `9f5e1601-a243-11f1-b532-320a589b8025`
+   - Dashboard: https://cursor.com/dashboard/cloud-agents/environments/e/9f5e1601-a243-11f1-b532-320a589b8025
    - https://github.com/thomas-co-international/advisory-admin
    - https://github.com/thomas-co-international/advisory-api
 2. The agent's prompt is the **First prompt** section, then the **Verify task** section. Do not replace the verify task with a coding task.
-3. Reply to the user with the JSON the Cloud Agent printed.
+3. As soon as the Cloud Agent exists, reply to the user with its URL (`https://cursor.com/agents/bc-...`). Then reply with the JSON the Cloud Agent printed.
 
 Pass only if `poteto_heading` is `# Poteto mode`, `pstack_files_on_disk` is true, `thomas_dot_cursor_present` is false, `owner_team_id` is null, and `agent_source` is not `GLASS` and not `AS_SUBAGENT_FROM_CLOUD`.
 
