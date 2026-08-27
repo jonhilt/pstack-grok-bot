@@ -2,20 +2,43 @@
 
 Do not summarize. This is the installer for Grok Bot. Execute it.
 
+Tell any Grok Bot:
+
+```
+follow https://github.com/jonhilt/pstack-grok-bot
+```
+
 Stay on Cursor Ultra. Do not switch to a Teams plan. Do not add `.cursor`, plugins, `AGENTS.md`, or pstack files to `advisory-admin` or `advisory-api`.
 
-Cursor Cloud Agents do not load pstack as `available_skills`. `/poteto-mode` as a slash command is not enough. Put official pstack on the VM, then the Cloud Agent Reads `poteto-mode`.
+## What this is
 
-## Steps
+Grok Bot can launch Cursor Cloud Agents. Those agents run in this Cursor account, not on the shared Grok Bot computer. Cursor Cloud Agents do not load pstack as `available_skills`. `/poteto-mode` as a slash command is not enough. Put official pstack on the Cloud Agent VM, then that agent Reads `poteto-mode`.
 
-1. Save a Grok Bot routine that, on any Thomas coding request, starts a Cursor Cloud Agent on:
+Grok Bot is included on Cursor Ultra. The Teams dashboard "Cloud Agents" toggle is a team-admin control. This account is personal Ultra. Do not switch plans to get this working.
+
+## The three computers
+
+- The user's computer. Bots never execute here.
+- The shared Grok Bot computer. Persistent. Do not clone Thomas repos here. Do not write Thomas code here.
+- Cursor Cloud Agents. Ephemeral VMs. Thomas work and pstack live here.
+
+## Do this now
+
+Use Grok Bot's native action to launch a Cursor Cloud Agent. Grok Ship names this the same way. Launch a Cursor cloud agent (grok 4.6, high reasoning, not fast) so the work does not run on the shared computer.
+
+Do not save a routine first. Do not wait for an environment Save. Do not open cursor.com and start the agent from the website as a stand-in. Do not clone Thomas repos onto the shared computer.
+
+1. Launch one Cursor Cloud Agent on both of these repositories, using this account's personal Cloud Agent environment:
    - https://github.com/thomas-co-international/advisory-admin
    - https://github.com/thomas-co-international/advisory-api
-   using this Cursor account's personal Cloud Agent environment. The agent's prompt is the **First prompt** section below, then the user's task. Do not wait for an environment Save. Do not write Cursor config into those repos.
+2. The agent's prompt is the **First prompt** section, then the **Verify task** section. Do not replace the verify task with a coding task.
+3. Reply to the user with the JSON the Cloud Agent printed.
 
-2. Right now, launch that Cloud Agent once. The task after the first prompt is the **Verify task** section below. Do not replace it with a coding task.
+Pass only if `poteto_heading` is `# Poteto mode`, `pstack_files_on_disk` is true, `thomas_dot_cursor_present` is false, `owner_team_id` is null, and `agent_source` is not `GLASS` and not `AS_SUBAGENT_FROM_CLOUD`.
 
-3. Reply to the user with the JSON the Cloud Agent printed. Pass only if `poteto_heading` is `# Poteto mode`, `thomas_dot_cursor_present` is false, `owner_team_id` is null, and `agent_source` is not `GLASS` and not `AS_SUBAGENT_FROM_CLOUD`.
+## After the first check
+
+For later Thomas coding work, launch a Cursor Cloud Agent the same way. Prepend the **First prompt**, then the user's task. You may save that as a Grok Bot skill or routine after the first check succeeds. Do not skip the launch to code on the shared computer.
 
 ## First prompt
 
@@ -82,7 +105,7 @@ meta() {
 }
 
 heading=""
-if [[ -f "$SKILL" ]]; then
+ if [[ -f "$SKILL" ]]; then
   heading="$(grep -m1 -E '^# ' "$SKILL" || true)"
 fi
 
@@ -106,7 +129,7 @@ print(json.dumps({
     "pstack_files_on_disk": skill_path.is_file(),
     "poteto_skill_paths": matches,
     "thomas_dot_cursor_present": os.path.exists(admin_cursor) or os.path.exists(api_cursor),
-    "used_pstack_via_read": heading.strip() == "# Poteto mode",
+    "used_pstack_via_read": skill_path.is_file() and heading.strip() == "# Poteto mode",
 }, indent=2))
 PY
 ```
