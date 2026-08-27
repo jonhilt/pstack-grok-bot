@@ -14,7 +14,9 @@ Stay on Cursor Ultra. Do not switch to a Teams plan. Do not add `.cursor`, plugi
 
 Grok Bot can launch Cursor Cloud Agents. Those agents run in this Cursor account, not on the shared Grok Bot computer. Cursor Cloud Agents do not load pstack as `available_skills`. `/poteto-mode` as a slash command is not enough. Put official pstack on the Cloud Agent VM, then that agent Reads `poteto-mode`.
 
-Grok Bot is included on Cursor Ultra. The Teams dashboard "Cloud Agents" toggle is a team-admin control. This account is personal Ultra. Do not switch plans to get this working.
+Grok Bot is included on Cursor Ultra. Sign in with the same Cursor account. You do not need a Teams plan. Cursor's help page says Ultra includes Grok Bot with the highest weekly usage: https://cursor.com/help/grok-bot/plans.md
+
+The Teams dashboard "Cloud Agents" toggle is a team-admin control. This account is personal Ultra. Do not switch plans to get this working.
 
 ## The three computers
 
@@ -26,7 +28,11 @@ Grok Bot is included on Cursor Ultra. The Teams dashboard "Cloud Agents" toggle 
 
 Use Grok Bot's native action to launch a Cursor Cloud Agent. Grok Ship names this the same way. Launch a Cursor cloud agent (grok 4.6, high reasoning, not fast) so the work does not run on the shared computer.
 
-Do not save a routine first. Do not wait for an environment Save. Do not open cursor.com and start the agent from the website as a stand-in. Do not clone Thomas repos onto the shared computer.
+Do not save a routine first. Do not wait for an environment Save. Do not clone Thomas repos onto the shared computer.
+
+Cursor documents Cloud Agent starts as the desktop Cloud dropdown, cursor.com/agents, Slack or GitHub or Linear @cursor, and the API. Grok Bot is not on that list. Do not start the agent from cursor.com/agents. That is a website launch, not Grok Bot. See https://cursor.com/help/ai-features/cloud-agents.md
+
+If Grok Bot shows a Connect card for Cursor or Cloud Agents, complete it. Plugins belong to the same Cursor account. See https://cursor.com/help/grok-bot/connect-plugins.md
 
 1. Launch one Cursor Cloud Agent on both of these repositories, using this account's personal Cloud Agent environment:
    - https://github.com/thomas-co-international/advisory-admin
