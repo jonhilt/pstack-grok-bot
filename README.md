@@ -105,7 +105,7 @@ meta() {
 }
 
 heading=""
- if [[ -f "$SKILL" ]]; then
+if [[ -f "$SKILL" ]]; then
   heading="$(grep -m1 -E '^# ' "$SKILL" || true)"
 fi
 
