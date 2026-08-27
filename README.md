@@ -32,6 +32,8 @@ Do not save a routine first. Do not wait for an environment Save. Do not clone T
 
 Do not open cursor.com/agents in the Grok Bot browser. Automated browsers hit Cloudflare bot protection at authenticator.cursor.sh and never reach the agents UI. That path is also a website launch, not Grok Bot. If native launch fails, reply with the exact error. Do not fall back to the website.
 
+If the error is `Could not launch the cloud agent: GitHub is rate limiting requests. Please try again later.`, wait 60 seconds and retry native launch once. Cursor's Cloud Agent API caps `GET /v0/repositories` at 1 request per user per minute and 30 per hour. Launch has to resolve the repo that way; listing agents does not. A personal GitHub PAT that is not exhausted does not disprove this cap. See https://forum.cursor.com/t/grokbot-cant-start-cloud-agent-from-cursor/168697 and https://cursor.com/docs/cloud-agent/api/v0.md
+
 Cursor documents Cloud Agent starts as the desktop Cloud dropdown, cursor.com/agents, Slack or GitHub or Linear @cursor, and the API. Grok Bot is not on that list. See https://cursor.com/help/ai-features/cloud-agents.md
 
 If Grok Bot shows a Connect card for Cursor or Cloud Agents, complete it. Plugins belong to the same Cursor account. See https://cursor.com/help/grok-bot/connect-plugins.md
